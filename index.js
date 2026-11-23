@@ -1,4 +1,9 @@
 #!/usr/bin/env node
 
-// non-blocking I/O
-console.log('process.argv');
+const noteFile = process.argv[2];
+const newNote = {
+  content: noteFile,
+  id: Date.now(),
+};
+
+console.log(newNote);
