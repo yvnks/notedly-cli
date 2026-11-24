@@ -1,0 +1,2 @@
+<> means the option is required.
+[] means it's optional.
