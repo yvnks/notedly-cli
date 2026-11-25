@@ -7,6 +7,7 @@ import {
   removeAllNotes,
   removeNote,
 } from "./notes.js";
+import { start } from "../client/components/App.js";
 
 const listNotes = (notes) => {
   notes.forEach((note) => {
@@ -89,14 +90,15 @@ yargs(hideBin(process.argv))
     "web [port]",
     "launch web app to see notes",
     (yargs) => {
-      return yargs.positional("note", {
-        type: "string",
-        description: "port to bind on ",
+      return yargs.positional("port", {
+        type: "number",
+        describe: "port to bind on ",
         default: 5000,
       });
     },
-    (argv) => {
-      console.log(argv);
+    async (argv) => {
+      const notes = await getAllNotes();
+      start(notes, argv.port);
     },
   )
 

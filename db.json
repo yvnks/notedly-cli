@@ -1,11 +1,45 @@
 {
   "notes": [
     {
-      "id": 1795632569655,
-      "content": "test new note",
+      "id": 1795637805701,
+      "content": "watch youtube",
       "tags": [
-        "cli",
-        "code"
+        "ent",
+        " ishowspeed"
+      ]
+    },
+    {
+      "id": 1795637826244,
+      "content": "make dinner",
+      "tags": [
+        "lifestyle",
+        " sushi",
+        " dinner"
+      ]
+    },
+    {
+      "id": 1795639418507,
+      "content": "call nyanta",
+      "tags": [
+        "love",
+        " goals"
+      ]
+    },
+    {
+      "id": "8a9c29e3-b362-4a5c-81aa-36bab145fdd6",
+      "content": "make dinner & watch youtube",
+      "tags": [
+        "ent",
+        " dinner"
+      ]
+    },
+    {
+      "id": "312b4684-c367-4b95-90ae-4d7dbf61febc",
+      "content": "complete scott moss course on master.dev",
+      "tags": [
+        "edu",
+        " code",
+        " swe"
       ]
     }
   ]
