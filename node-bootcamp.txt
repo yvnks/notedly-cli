@@ -1,2 +1,9 @@
 <> means the option is required.
 [] means it's optional.
+
+a spy is a function that tells me stuff about my mock fn. eg how many times it got called, args etc
+i can perform expectations on it. 
+
+dynamic imports uses async/await.
+
+before i write a test, i need to clear their state.
