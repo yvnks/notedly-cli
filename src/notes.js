@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 
 export async function newNote(note, tags) {
   const newNotes = {
-    id: randomUUID(),
+    id: Date.now(),
     content: note,
     tags,
   };
