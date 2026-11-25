@@ -1,3 +1,12 @@
 {
-  "notes": []
+  "notes": [
+    {
+      "id": 1795632569655,
+      "content": "test new note",
+      "tags": [
+        "cli",
+        "code"
+      ]
+    }
+  ]
 }

@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, jest, test } from "@jest/globals";
-import { randomUUID } from "node:crypto";
 
 jest.unstable_mockModule("../src/db.js", () => ({
   insertDb: jest.fn(),
@@ -8,7 +7,8 @@ jest.unstable_mockModule("../src/db.js", () => ({
 }));
 
 const { insertDb, getDB, saveDB } = await import("../src/db.js");
-const { newNote } = await import("../src/notes.js");
+const { newNote, getAllNotes, removeAllNotes } =
+  await import("../src/notes.js");
 
 beforeEach(() => {
   insertDb.mockClear();
@@ -28,5 +28,24 @@ describe("New note:", () => {
 
     const returnNewNote = await newNote(data.content, data.tags);
     expect(returnNewNote).toEqual(data);
+  });
+});
+
+describe("getAllNotes", () => {
+  test("return all notes from the db", async () => {
+    const db = {
+      notes: ["note1", "note2", "note3"],
+    };
+
+    getDB.mockResolvedValue(db);
+    const result = await getAllNotes();
+    expect(result).toEqual(db.notes);
+  });
+});
+
+describe("removesAllNotes:", () => {
+  test("deletes all notes from the db", async () => {
+    await removeAllNotes();
+    expect(saveDB).toHaveBeenCalledWith({ notes: [] });
   });
 });
