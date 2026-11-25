@@ -1,5 +1,5 @@
-import { insertDb, getDB, saveDB } from "./db";
-import randomUUID from "node:crypto";
+import { insertDb, getDB, saveDB } from "./db.js";
+import { randomUUID } from "node:crypto";
 
 export async function newNote(note, tags) {
   const newNotes = {
@@ -13,23 +13,24 @@ export async function newNote(note, tags) {
 }
 
 export async function getAllNotes() {
-  const { note: notes } = await getDB();
+  const { notes } = await getDB();
   return notes;
 }
 
 export async function findNotes(filter) {
   const { notes } = await getDB();
   return notes.filter((note) =>
-    note.content.tolowerCase().includes(filter.tolowerCase()),
+    note.content.toLowerCase().includes(filter.toLowerCase()),
   );
 }
 
 export async function removeNote(id) {
-  const { notes } = getDB();
+  const { notes } = await getDB();
 
   const match = notes.find((note) => note.id === id);
 
   if (match) {
+    // create a new note without the curr id.
     const newNotes = notes.filter((note) => note.id !== id);
     await saveDB({ notes: newNotes });
     return newNotes;
@@ -39,5 +40,5 @@ export async function removeNote(id) {
 }
 
 export async function removeAllNotes() {
-  saveDB({ notes:  [] });
+  saveDB({ notes: [] });
 }

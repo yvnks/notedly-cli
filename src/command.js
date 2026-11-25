@@ -1,5 +1,21 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
+import {
+  findNotes,
+  getAllNotes,
+  newNote,
+  removeAllNotes,
+  removeNote,
+} from "./notes.js";
+
+const listNotes = (notes) => {
+  notes.forEach((note) => {
+    console.log("\n");
+    console.log("id:", note.id);
+    console.log("tags:", note.tags.join(","));
+    console.log("note:", note.content);
+  });
+};
 
 yargs(hideBin(process.argv))
   // todo: adds a new task to the cli.
@@ -12,8 +28,11 @@ yargs(hideBin(process.argv))
         description: "The content of the note",
       });
     },
-    (argv) => {
+    async (argv) => {
       console.log(argv.note);
+      const tags = argv.tags ? argv.tags.split(",") : [];
+      const note = await newNote(argv.note, tags);
+      console.log("New note added:", note);
     },
   )
 
@@ -27,37 +46,41 @@ yargs(hideBin(process.argv))
         description: "get all notes",
       });
     },
-    (argv) => {
-      console.log(argv);
-    },
-  )
-  // todo: gets all the notes
-  .command(
-    "find <filter>",
-    "get matching notes",
-    (yargs) => {
-      return yargs.positional("note", {
-        type: "string",
-        description: "get all notes",
-      });
-    },
-    (argv) => {
-      console.log(argv);
+    async () => {
+      const allNotes = await getAllNotes();
+      listNotes(allNotes);
     },
   )
 
   // todo: gets all the notes
   .command(
-    "remote <id>",
-    "remove note by id",
+    "find <filter>",
+    "get matching notes",
     (yargs) => {
-      return yargs.positional("note", {
+      return yargs.positional("filter", {
         type: "string",
         description: "get all notes",
       });
     },
-    (argv) => {
-      console.log(argv);
+    async (argv) => {
+      const queryNote = await findNotes(argv.filter);
+      listNotes(queryNote);
+    },
+  )
+
+  // todo: gets all the notes
+  .command(
+    `remove <id>`,
+    `remove note by id`,
+    (yargs) => {
+      return yargs.positional("remove", {
+        type: "string",
+        description: "note by passing the id",
+      });
+    },
+    async (argv) => {
+      const id = await removeNote(argv.id);
+      console.log(id);
     },
   )
 
@@ -82,13 +105,14 @@ yargs(hideBin(process.argv))
     "clean",
     "removes all notes from db",
     (yargs) => {
-      return yargs.positional("note", {
+      return yargs.positional("clean", {
         type: "string",
-        description: "get all notes",
+        description: "removes all notes from the db.",
       });
     },
     (argv) => {
-      console.log(argv);
+      removeAllNotes();
+      console.log("You have successfully deleted all your notes.");
     },
   )
 

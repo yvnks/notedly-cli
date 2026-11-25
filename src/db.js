@@ -13,6 +13,6 @@ export async function saveDB(db) {
 export async function insertDb(note) {
   const db = await getDB(note);
   db.notes.push(note);
-  await saveToDatabase(db);
+  await saveDB(db);
   return note;
 } 
