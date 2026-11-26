@@ -8,15 +8,7 @@ import {
   removeNote,
 } from "./notes.js";
 import { start } from "../client/components/App.js";
-
-const listNotes = (notes) => {
-  notes.forEach((note) => {
-    console.log("\n");
-    console.log("id:", note.id);
-    console.log("tags:", note.tags.join(","));
-    console.log("note:", note.content);
-  });
-};
+import { listNotes } from "../utils/listNotes.js";
 
 yargs(hideBin(process.argv))
   // todo: adds a new task to the cli.
@@ -97,7 +89,7 @@ yargs(hideBin(process.argv))
       });
     },
     async (argv) => {
-      const notes = await getAllNotes();
+      const xnotes = await getAllNotes();
       start(notes, argv.port);
     },
   )
