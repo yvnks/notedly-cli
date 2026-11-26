@@ -4,7 +4,7 @@ Notedly is a small Node.js command-line app for creating, listing, searching, an
 
 ## Requirements
 
-- Node.js
+- Node.js 18+
 - npm
 
 ## Setup
@@ -22,7 +22,7 @@ Run commands from the project root with `node index.js`.
 Create a note:
 
 ```sh
-node index.js new "Pick up groceries" --tags "personal,errands"
+note new index.js new "Pick up groceries" --tags "personal,errands"
 ```
 
 The `--tags` option is optional. Separate multiple tags with commas.
@@ -30,38 +30,34 @@ The `--tags` option is optional. Separate multiple tags with commas.
 List all notes:
 
 ```sh
-node index.js all
+note all
 ```
 
 Find notes whose content contains a search term:
 
 ```sh
-node index.js find groceries
+note find groceries
 ```
 
 Remove a note by its ID (shown by the `all` command):
 
 ```sh
-node index.js remove <id>
+note remove <id>
 ```
 
 Remove all notes:
 
 ```sh
-node index.js clean
+note clean
 ```
 
 Launch the local web view on port `5000`:
 
 ```sh
-node index.js web
+note web [4000]
 ```
-
 Pass a port number to use a different port:
 
-```sh
-node index.js web 3000
-```
 
 ## Tests
 
